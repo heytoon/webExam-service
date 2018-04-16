@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+      http://www.springframework.org/schema/context
+      http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- 引入jdbc配置文件 对配置进行加密的话 需要扩展PropertyPlaceholderConfigurer类然后配置就不能使用这个了-->
+	<context:property-placeholder location="classpath:*.properties" />
+	 
+	 <!-- 配置加密的数据库连接用户名和密码
+	<bean class="com.seaway.web.util.EncryptPropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:jdbc.properties" />
+	</bean>
+	   -->  
+	    
+	    
+	<!-- 扫描文件（自动将service层注入） -->
+	<context:component-scan base-package="com.http" />
+	
+	<import resource="classpath:dubbo-provider.xml" />
+	
+	<import resource="classpath:spring-mybatis.xml" />
+	
+	<import resource="classpath:spring-redis.xml" />
+	
+	
+	
+</beans>

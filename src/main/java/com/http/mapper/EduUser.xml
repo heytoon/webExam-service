@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.mopote.http.dao.EduUserDAO" >
+
+	<resultMap id="BaseResultMap" type="com.mopote.http.model.EduUser">
+	    <result column="id" property="id" jdbcType="BIGINT" />
+	    <result column="name" property="name" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="Base_Column_List">
+	    <![CDATA[
+        	id as id,
+        	name as name
+	    ]]>
+	</sql>
+	
+	<select id="getRowCount" parameterType="com.mopote.http.model.EduUser" resultType="java.lang.Integer" >
+          select count(*) from user t
+		      where 1=1 
+					<if test="name != null and name != ''">
+						and (t.name = #{name})
+					</if>
+    
+  </select>
+	<select id="getById"  parameterType="com.mopote.http.model.EduUser" resultMap="BaseResultMap" >
+		select 
+		<include refid="Base_Column_List" />
+		from user t
+		where 1=1 
+		<if test="name != null and name != ''">
+						and (t.name = #{name})
+					</if>
+	</select>
+	
+</mapper>
